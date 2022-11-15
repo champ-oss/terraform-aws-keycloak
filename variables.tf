@@ -45,12 +45,6 @@ variable "image_shared_keycloak" {
   default     = "quay.io/keycloak/keycloak:20.0.1"
 }
 
-variable "dns_name" {
-  description = "dns name"
-  type        = string
-  default     = {}
-}
-
 variable "tags" {
   description = "Map of tags to assign to resources"
   type        = map(string)
