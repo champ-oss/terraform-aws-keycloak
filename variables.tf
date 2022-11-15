@@ -46,7 +46,9 @@ variable "certificate_arn" {
 }
 
 variable "image_shared_keycloak" {
-  default = "quay.io/keycloak/keycloak:20.0.1"
+  description = "Docker image for keycloak"
+  type        = string
+  default     = "quay.io/keycloak/keycloak:20.0.1"
 }
 
 variable "dns_name" {
@@ -54,19 +56,9 @@ variable "dns_name" {
 }
 
 variable "tags" {
-  default = {}
-}
-
-variable "kms_secrets_keycloak" {
-  default = {}
-}
-
-variable "config_global" {
-  default = {}
-}
-
-variable "config_keycloak" {
-  default = {}
+  description = "Map of tags to assign to resources"
+  type        = map(string)
+  default     = {}
 }
 
 variable "app_max_capacity" {

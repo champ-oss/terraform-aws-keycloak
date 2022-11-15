@@ -36,7 +36,7 @@ module "shared_keycloak" {
     KEYCLOAK_PASSWORD = aws_ssm_parameter.shared-keycloak.name
   }
   port         = 443
-  kms_secrets  = merge(local.kms_secrets_keycloak, var.kms_secrets_keycloak)
+  kms_secrets  = merge(local.kms_secrets_keycloak)
   min_capacity = var.app_min_capacity
   max_capacity = var.app_max_capacity
 
