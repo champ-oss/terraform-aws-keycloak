@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 locals {
-  git = "gemini"
+  git = "terraform-aws-keycloak"
 }
 
 data "aws_route53_zone" "this" {
