@@ -1,7 +1,5 @@
 locals {
-  dns_name = {
-    shared_keycloak = "${trimprefix(var.git, "env-")}.${var.domain}"
-  }
+  keycloak_dns_name = var.keycloak_hostname != null ? "${var.keycloak_hostname}.${var.domain}" : "keycloak-${random_string.identifier.result}.${var.domain}"
   tags = {
     cost    = "shared"
     creator = "terraform"
@@ -17,6 +15,12 @@ variable "zone_id" {
 variable "domain" {
   description = "Route53 Domain"
   type        = string
+}
+
+variable "keycloak_hostname" {
+  description = "Optional hostname for the keycloak server. If omitted a random identifier will be used."
+  type        = string
+  default     = "keycloak"
 }
 
 variable "vpc_id" {

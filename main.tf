@@ -6,7 +6,7 @@ resource "random_string" "identifier" {
   number  = true
 }
 
-resource "random_password" "shared-keycloak" {
+resource "random_password" "shared_keycloak" {
   length  = 32
   special = false
 }

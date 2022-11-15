@@ -17,7 +17,7 @@ module "shared_keycloak" {
 
   # app specific variables
   name     = "shared-keycloak"
-  dns_name = merge(local.dns_name, var.dns_name)["shared_keycloak"]
+  dns_name = local.keycloak_dns_name
   image    = var.image_shared_keycloak
   cpu      = "2048"
   memory   = "4096"
