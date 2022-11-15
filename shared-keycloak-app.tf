@@ -30,7 +30,7 @@ module "shared_keycloak" {
     KEYCLOAK_USER            = var.keycloak_user
     PROXY_ADDRESS_FORWARDING = "true"
   }
-
+  ## passing passwords as secrets
   secrets = {
     DB_PASSWORD       = module.aurora_keycloak.master_password
     KEYCLOAK_PASSWORD = aws_ssm_parameter.shared_keycloak.name
