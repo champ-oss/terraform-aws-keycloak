@@ -1,5 +1,5 @@
 module "aurora_keycloak" {
-  source                    = "git::git@github.com:champ-oss/terraform-aws-aurora.git?ref=v1.0.19-099cab0"
+  source                    = "github.com/champ-oss/terraform-aws-aurora.git?ref=v1.0.19-099cab0"
   cluster_identifier_prefix = var.git
   iam_auth_lambda_enabled   = true
   private_subnet_ids        = var.private_subnet_ids
