@@ -1,4 +1,4 @@
-resource "aws_ssm_parameter" "shared-keycloak" {
+resource "aws_ssm_parameter" "shared_keycloak" {
   name        = "${var.git}-shared-keycloak"
   description = "Default Keycloak admin password"
   type        = "SecureString"

@@ -7,12 +7,6 @@ locals {
     creator = "terraform"
     git     = var.git
   }
-  kms_secrets_keycloak = {}
-  secrets_global       = {}
-  secrets_keycloak = {
-  }
-  config_keycloak = {
-  }
 }
 
 variable "zone_id" {
@@ -52,7 +46,9 @@ variable "image_shared_keycloak" {
 }
 
 variable "dns_name" {
-  default = {}
+  description = "dns name"
+  type        = string
+  default     = {}
 }
 
 variable "tags" {

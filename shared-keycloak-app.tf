@@ -33,10 +33,9 @@ module "shared_keycloak" {
 
   secrets = {
     DB_PASSWORD       = module.aurora_keycloak.master_password
-    KEYCLOAK_PASSWORD = aws_ssm_parameter.shared-keycloak.name
+    KEYCLOAK_PASSWORD = aws_ssm_parameter.shared_keycloak.name
   }
   port         = 443
-  kms_secrets  = merge(local.kms_secrets_keycloak)
   min_capacity = var.app_min_capacity
   max_capacity = var.app_max_capacity
 
