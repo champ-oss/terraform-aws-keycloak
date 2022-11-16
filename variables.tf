@@ -110,7 +110,13 @@ variable "skip_final_snapshot" {
 }
 
 variable "enable_lambda_cw_alert" {
-  description = "skip final snapshot"
+  description = "enable lambda cw alert"
+  type        = bool
+  default     = false
+}
+
+variable "metric_alarms_enabled" {
+  description = "metric alarm enabled option"
   type        = bool
   default     = false
 }
