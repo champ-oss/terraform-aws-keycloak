@@ -22,17 +22,17 @@ module "keycloak" {
   cpu      = "2048"
   memory   = "4096"
   environment = {
-    DB_ADDR                  = module.aurora_keycloak.endpoint
-    DB_DATABASE              = module.aurora_keycloak.database_name
-    DB_PORT                  = tostring(module.aurora_keycloak.port)
-    DB_USER                  = module.aurora_keycloak.master_username
+    DB_ADDR                  = module.keycloak.endpoint
+    DB_DATABASE              = module.keycloak.database_name
+    DB_PORT                  = tostring(module.keycloak.port)
+    DB_USER                  = module.keycloak.master_username
     DB_VENDOR                = var.db_vendor
     KEYCLOAK_USER            = var.keycloak_user
     PROXY_ADDRESS_FORWARDING = "true"
   }
   ## passing passwords as secrets
   secrets = {
-    DB_PASSWORD       = module.aurora_keycloak.master_password
+    DB_PASSWORD       = module.keycloak.master_password
     KEYCLOAK_PASSWORD = aws_ssm_parameter.shared_keycloak.name
   }
   port         = 443
