@@ -18,6 +18,7 @@ module "core" {
   vpc_id             = var.vpc_id
   public_subnet_ids  = var.public_subnet_ids
   private_subnet_ids = var.private_subnet_ids
+  protect            = false
   tags               = merge(local.tags, var.tags)
   certificate_arn    = var.certificate_arn
 }
