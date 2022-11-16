@@ -1,4 +1,4 @@
-module "aurora_keycloak" {
+module "aurora" {
   source                    = "github.com/champ-oss/terraform-aws-aurora.git?ref=v1.0.19-099cab0"
   cluster_identifier_prefix = var.git
   iam_auth_lambda_enabled   = true

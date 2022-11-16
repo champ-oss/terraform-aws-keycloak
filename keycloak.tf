@@ -1,4 +1,4 @@
-module "shared_keycloak" {
+module "keycloak" {
   source                = "github.com/champ-oss/terraform-aws-app.git?ref=v1.0.169-2247a4d"
   git                   = "${var.git}-${random_string.identifier.result}"
   vpc_id                = var.vpc_id
