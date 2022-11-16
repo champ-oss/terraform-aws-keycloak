@@ -86,7 +86,7 @@ variable "cloudwatch_slack_url" {
 }
 
 variable "db_vendor" {
-  description = "db_vendor"
+  description = "db_vendor, only supporting mysql for now"
   type        = string
   default     = "mysql"
 }

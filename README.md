@@ -1,5 +1,39 @@
 # terraform-aws-keycloak
 
+Summary: terraform module for aws keycloak
+
+![ci](https://github.com/conventional-changelog/standard-version/workflows/ci/badge.svg)
+[![version](https://img.shields.io/badge/version-1.x-yellow.svg)](https://semver.org)
+
+## Table of Contents
+* [General Info](#general-information)
+* [Technologies Used](#technologies-used)
+* [Features](#Features)
+* [Usage](#usage)
+* [Requirements](#Requirements)
+* [Providers](#Providers)
+* [Modules](#Modules)
+* [Resources](#Resources)
+* [Inputs](#Inputs)
+* [Outputs](#Outputs)
+* [Project Status](#project-status)
+
+## General Information
+- deploy several resources to support aws keycloak
+
+## Technologies Used
+- terraform
+- github actions
+
+## Features
+
+* deploy aws keycloak
+* deploy aws aurora using mysql 
+
+## Usage
+
+* look at examples/complete/main.tf for usage
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
@@ -60,3 +94,6 @@
 
 No outputs.
 <!-- END_TF_DOCS -->
+
+## Project Status
+Project is: _in_progress_ 
