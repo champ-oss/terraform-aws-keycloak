@@ -70,7 +70,7 @@ variable "app_min_capacity" {
 variable "aurora_max_capacity" {
   description = "https://www.terraform.io/docs/providers/aws/r/rds_cluster.html#max_capacity"
   type        = number
-  default     = 8
+  default     = 10
 }
 
 variable "aurora_min_capacity" {
@@ -94,7 +94,7 @@ variable "db_vendor" {
 variable "keycloak_user" {
   description = "default keycloak user"
   type        = string
-  default     = "shared-keycloak"
+  default     = "keycloak"
 }
 
 variable "protect" {
