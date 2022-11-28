@@ -7,6 +7,36 @@ locals {
   }
 }
 
+variable "aurora_max_capacity" {
+  description = "https://www.terraform.io/docs/providers/aws/r/rds_cluster.html#max_capacity"
+  type        = number
+  default     = 10
+}
+
+variable "aurora_min_capacity" {
+  description = "aurora cluster count"
+  type        = number
+  default     = 2
+}
+
+variable "metric_alarms_enabled" {
+  description = "metric alarm enabled option"
+  type        = bool
+  default     = false
+}
+
+variable "skip_final_snapshot" {
+  description = "skip final snapshot"
+  type        = bool
+  default     = false
+}
+
+variable "protect" {
+  description = "Enables deletion protection on eligible resources"
+  type        = bool
+  default     = true
+}
+
 variable "zone_id" {
   description = "Route53 Zone ID"
   type        = string
@@ -67,56 +97,20 @@ variable "app_min_capacity" {
   default     = 2
 }
 
-variable "aurora_max_capacity" {
-  description = "https://www.terraform.io/docs/providers/aws/r/rds_cluster.html#max_capacity"
-  type        = number
-  default     = 8
-}
-
-variable "aurora_min_capacity" {
-  description = "aurora cluster count"
-  type        = number
-  default     = 2
-}
-
 variable "cloudwatch_slack_url" {
   description = "channel to post error alert"
   type        = string
   default     = ""
 }
 
-variable "db_vendor" {
-  description = "db_vendor, only supporting mysql for now"
+variable "keycloak_admin_user" {
+  description = "default keycloak admin user"
   type        = string
-  default     = "mysql"
-}
-
-variable "keycloak_user" {
-  description = "default keycloak user"
-  type        = string
-  default     = "shared-keycloak"
-}
-
-variable "protect" {
-  description = "Enables deletion protection on eligible resources"
-  type        = bool
-  default     = true
-}
-
-variable "skip_final_snapshot" {
-  description = "skip final snapshot"
-  type        = bool
-  default     = false
+  default     = "admin"
 }
 
 variable "enable_lambda_cw_alert" {
   description = "enable lambda cw alert"
-  type        = bool
-  default     = false
-}
-
-variable "metric_alarms_enabled" {
-  description = "metric alarm enabled option"
   type        = bool
   default     = false
 }
@@ -131,4 +125,46 @@ variable "git" {
   description = "Name of the Git repo"
   type        = string
   default     = "terraform-aws-keycloak"
+}
+
+variable "kc_loglevel" {
+  description = "log level"
+  type        = string
+  default     = "INFO"
+}
+
+variable "proxy" {
+  description = "https://www.keycloak.org/server/all-config#_proxy"
+  type        = string
+  default     = "edge"
+}
+
+variable "http_enabled" {
+  description = "https://www.keycloak.org/server/all-config#_httptls"
+  type        = bool
+  default     = true
+}
+
+variable "hostname_strict_backchannel" {
+  description = "https://www.keycloak.org/server/all-config#_httptls"
+  type        = bool
+  default     = false
+}
+
+variable "hostname_strict_https" {
+  description = "https://www.keycloak.org/server/all-config#_httptls"
+  type        = bool
+  default     = false
+}
+
+variable "healthcheck_enabled" {
+  description = "https://www.keycloak.org/server/all-config#_health"
+  type        = bool
+  default     = true
+}
+
+variable "kc_metrics_enabled" {
+  description = "https://www.keycloak.org/server/all-config#_metrics"
+  type        = bool
+  default     = false
 }
