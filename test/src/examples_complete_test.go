@@ -27,4 +27,5 @@ func TestExamplesComplete(t *testing.T) {
 	cmd.Dir = "../../"
 	cmd.Run()
 	terraform.ApplyAndIdempotent(t, terraformOptions)
+	time.Sleep(300 * time.Second)
 }
