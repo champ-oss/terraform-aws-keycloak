@@ -57,11 +57,9 @@ module "keycloak" {
   depends_on             = [module.aurora]
 
   # sticky session on lb
-  /*
   stickiness = [{
     enabled : true,
     type : "lb_cookie"
     cookie_duration : 43200,
   }]
-  */
 }
