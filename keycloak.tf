@@ -25,7 +25,7 @@ module "keycloak" {
   healthcheck                       = "/health/ready"
   health_check_grace_period_seconds = 300
   environment = {
-    DB_ADDR = module.aurora.endpoint
+    DB_ADDR                        = module.aurora.endpoint
     DB_USER                        = module.aurora.master_username
     DB_VENDOR                      = "mysql"
     KEYCLOAK_ADMIN                 = var.keycloak_admin_user

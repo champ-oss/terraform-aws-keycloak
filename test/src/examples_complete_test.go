@@ -5,7 +5,6 @@ import (
 	"os"
 	"os/exec"
 	"testing"
-	"time"
 )
 
 // TestExamplesComplete tests a typical deployment of this module
@@ -28,5 +27,4 @@ func TestExamplesComplete(t *testing.T) {
 	cmd.Dir = "../../"
 	cmd.Run()
 	terraform.ApplyAndIdempotent(t, terraformOptions)
-	time.Sleep(300 * time.Second)
 }
