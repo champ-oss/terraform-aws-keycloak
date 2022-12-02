@@ -101,6 +101,11 @@ variable "cloudwatch_slack_url" {
   description = "channel to post error alert"
   type        = string
   default     = ""
+
+variable "aurora_max_capacity" {
+  description = "https://www.terraform.io/docs/providers/aws/r/rds_cluster.html#max_capacity"
+  type        = number
+  default     = 10
 }
 
 variable "keycloak_admin_user" {
