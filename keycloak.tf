@@ -22,7 +22,7 @@ module "keycloak" {
   cpu      = "2048"
   memory   = "4096"
 
-  healthcheck                       = "/admin/"
+  healthcheck                       = "/auth/health"
   health_check_grace_period_seconds = 300
   environment = {
     KC_DB_URL                      = module.aurora.endpoint
