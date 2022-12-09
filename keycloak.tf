@@ -22,12 +22,12 @@ module "keycloak" {
   cpu      = "2048"
   memory   = "4096"
 
-  healthcheck                       = "/auth/health"
+  healthcheck                       = "/auth/"
   health_check_grace_period_seconds = 300
   environment = {
-    DB_ADDR                        = module.aurora.endpoint
-    DB_USER                        = module.aurora.master_username
-    DB_VENDOR                      = "mysql"
+    KC_DB_URL                      = module.aurora.endpoint
+    KC_DB_USERNAME                 = module.aurora.master_username
+    KC_DB                          = "mysql"
     KEYCLOAK_ADMIN                 = var.keycloak_admin_user
     KC_HEALTH_ENABLED              = var.healthcheck_enabled
     KC_METRICS_ENABLED             = var.kc_metrics_enabled
@@ -41,7 +41,7 @@ module "keycloak" {
   }
   ## passing passwords as secrets
   secrets = {
-    DB_PASSWORD             = module.aurora.password_ssm_name
+    KC_DB_PASSWORD          = module.aurora.password_ssm_name
     KEYCLOAK_ADMIN_PASSWORD = aws_ssm_parameter.keycloak_password.name
   }
   command      = ["start --cache-config-file=cache-ispn-jdbc-ping.xml"]
