@@ -27,7 +27,7 @@ module "keycloak" {
   environment = {
     KC_DB_URL                      = module.aurora.endpoint
     KC_DB_USERNAME                 = module.aurora.master_username
-    DB_VENDOR                      = "mysql"
+    KC_DB                          = "mysql"
     KEYCLOAK_ADMIN                 = var.keycloak_admin_user
     KC_HEALTH_ENABLED              = var.healthcheck_enabled
     KC_METRICS_ENABLED             = var.kc_metrics_enabled
