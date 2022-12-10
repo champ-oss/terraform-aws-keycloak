@@ -26,7 +26,7 @@ module "keycloak" {
   health_check_grace_period_seconds = 300
   environment = {
     KC_DB_URL_HOST                 = module.aurora.endpoint
-    KC_DB_URL_DATABASE             = "keycloak"
+    KC_DB_URL_DATABASE             = module.aurora.database_name
     KC_DB_USERNAME                 = module.aurora.master_username
     KC_DB                          = "mysql"
     KEYCLOAK_ADMIN                 = var.keycloak_admin_user
