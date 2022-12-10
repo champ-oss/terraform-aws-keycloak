@@ -148,7 +148,7 @@ variable "http_enabled" {
 variable "hostname_strict_backchannel" {
   description = "https://www.keycloak.org/server/all-config#_httptls"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "hostname_strict_https" {
