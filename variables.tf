@@ -168,3 +168,15 @@ variable "kc_metrics_enabled" {
   type        = bool
   default     = false
 }
+
+variable "jgroups_discovery_properties" {
+  description = "jgroups discovery properties"
+  type        = string
+  default     = "datasource_jndi_name=java:jboss/datasources/KeycloakDS,info_writer_sleep_time=500,remove_old_coords_on_view_change=true"
+}
+
+variable "app_command" {
+  description = "default command to run in ecs task definitions"
+  type        = list(string)
+  default     = ["start"]
+}

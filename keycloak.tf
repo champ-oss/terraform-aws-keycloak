@@ -40,14 +40,14 @@ module "keycloak" {
     KC_PROXY                       = var.proxy
     PROXY_ADDRESS_FORWARDING       = "true"
     JGROUPS_DISCOVERY_PROTOCOL     = "JDBC_PING"
-    JGROUPS_DISCOVERY_PROPERTIES   = "datasource_jndi_name=java:jboss/datasources/KeycloakDS,info_writer_sleep_time=500,remove_old_coords_on_view_change=true"
+    JGROUPS_DISCOVERY_PROPERTIES   = var.jgroups_discovery_properties
   }
   ## passing passwords as secrets
   secrets = {
     KC_DB_PASSWORD          = module.aurora.password_ssm_name
     KEYCLOAK_ADMIN_PASSWORD = aws_ssm_parameter.keycloak_password.name
   }
-  command      = ["start --cache-config-file=cache-ispn-jdbc-ping.xml"]
+  command      = var.app_command
   min_capacity = var.app_min_capacity
   max_capacity = var.app_max_capacity
 
@@ -56,12 +56,4 @@ module "keycloak" {
   slack_url              = var.cloudwatch_slack_url != "" ? var.cloudwatch_slack_url : null
   filter_pattern         = var.filter_pattern != "" ? var.filter_pattern : null
   depends_on             = [module.aurora]
-
-  # sticky session on lb
-  /*stickiness = [{
-    enabled : true,
-    type : "lb_cookie"
-    cookie_duration : 43200,
-  }]
-  */
 }
