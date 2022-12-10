@@ -1,5 +1,5 @@
 locals {
-  keycloak_dns_name = var.keycloak_hostname != null ? "${var.keycloak_hostname}.${var.domain}" : "keycloak-${random_string.identifier.result}.${var.domain}"
+  keycloak_dns_name = var.keycloak_hostname != null ? "https://${var.keycloak_hostname}.${var.domain}" : "keycloak-${random_string.identifier.result}.${var.domain}"
   tags = {
     cost    = "shared"
     creator = "terraform"
