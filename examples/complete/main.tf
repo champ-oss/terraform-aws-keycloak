@@ -48,7 +48,7 @@ module "acm" {
   source            = "github.com/champ-oss/terraform-aws-acm.git?ref=v1.0.110-61ad6b7"
   git               = local.git
   domain_name       = "keycloak.${data.aws_route53_zone.this.name}"
-  create_wildcard   = true
+  create_wildcard   = false
   zone_id           = data.aws_route53_zone.this.zone_id
   enable_validation = true
 }
