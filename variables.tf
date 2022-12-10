@@ -106,7 +106,7 @@ variable "cloudwatch_slack_url" {
 variable "keycloak_admin_user" {
   description = "default keycloak admin user"
   type        = string
-  default     = "keycloak"
+  default     = "admin"
 }
 
 variable "enable_lambda_cw_alert" {
