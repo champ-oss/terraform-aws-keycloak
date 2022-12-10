@@ -39,6 +39,7 @@ module "keycloak" {
     KC_HTTP_ENABLED                = var.http_enabled
     KC_PROXY                       = var.proxy
     PROXY_ADDRESS_FORWARDING       = "true"
+    KC_CACHE_CONFIG_FILE           = "cache-ispn-jdbc-ping.xml"
     JGROUPS_DISCOVERY_PROTOCOL     = "JDBC_PING"
     JGROUPS_DISCOVERY_PROPERTIES   = "datasource_jndi_name=java:jboss/datasources/KeycloakDS,info_writer_sleep_time=500,remove_old_coords_on_view_change=true"
   }
