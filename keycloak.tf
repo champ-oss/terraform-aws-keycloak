@@ -47,7 +47,7 @@ module "keycloak" {
     KC_DB_PASSWORD          = module.aurora.password_ssm_name
     KEYCLOAK_ADMIN_PASSWORD = aws_ssm_parameter.keycloak_password.name
   }
-  command      = ["start --optimized --cache-config-file=cache-ispn-jdbc-ping.xml"]
+  command      = ["start --cache-config-file=cache-ispn-jdbc-ping.xml"]
   min_capacity = var.app_min_capacity
   max_capacity = var.app_max_capacity
 
