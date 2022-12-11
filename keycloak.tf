@@ -56,4 +56,11 @@ module "keycloak" {
   slack_url              = var.cloudwatch_slack_url != "" ? var.cloudwatch_slack_url : null
   filter_pattern         = var.filter_pattern != "" ? var.filter_pattern : null
   depends_on             = [module.aurora]
+
+  # sticky session on lb
+  stickiness = [{
+    enabled : true,
+    type : "lb_cookie"
+    cookie_duration : 43200,
+  }]
 }
