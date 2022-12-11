@@ -41,7 +41,7 @@ module "keycloak" {
     PROXY_ADDRESS_FORWARDING       = "true"
     JGROUPS_DISCOVERY_PROTOCOL     = "JDBC_PING"
     JGROUPS_DISCOVERY_PROPERTIES   = var.jgroups_discovery_properties
-    JAVA_OPTS_APPEND               = "-Djboss.bind.address=127.0.0.1"
+    JAVA_OPTS_APPEND               = "-Djboss.bind.address=127.0.0.1 -Djboss.as.management.blocking.timeout=3600"
   }
   ## passing passwords as secrets
   secrets = {
