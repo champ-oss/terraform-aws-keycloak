@@ -63,5 +63,5 @@ module "this" {
   zone_id             = data.aws_route53_zone.this.zone_id
   protect             = false
   skip_final_snapshot = true
-  app_command         = ["show-config"]
+  app_command         = ["start --optimized"]
 }
