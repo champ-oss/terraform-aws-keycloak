@@ -43,6 +43,8 @@ module "keycloak" {
     JGROUPS_DISCOVERY_PROPERTIES   = var.jgroups_discovery_properties
     JAVA_OPTS                      = "-Djava.net.preferIPv4Stack=true -Djava.net.preferIPv4Addresses"
     KC_CACHE_STACK                 = "tcp"
+    KC_CACHE_CONFIG_FILE           = "cache-ispn-jdbc-ping.xml"
+    KC_CACHE                       = "ispn"
   }
   ## passing passwords as secrets
   secrets = {
