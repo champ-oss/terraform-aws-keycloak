@@ -41,7 +41,7 @@ module "keycloak" {
     PROXY_ADDRESS_FORWARDING       = "true"
     JGROUPS_DISCOVERY_PROTOCOL     = "JDBC_PING"
     JGROUPS_DISCOVERY_PROPERTIES   = var.jgroups_discovery_properties
-    JAVA_OPTS                      = "-Djava.net.preferIPv4Stack=true -Djava.net.preferIPv4Addresses -Djboss.bind.address=127.0.0.1"
+    JAVA_OPTS                      = "-Djava.net.preferIPv4Stack=true -Djava.net.preferIPv4Addresses -Djboss.bind.address=127.0.0.1 Djgroups.bind.port=7600"
     #   JAVA_OPTS_APPEND               = "-Djboss.bind.address=127.0.0.1"
     KC_CACHE_STACK = "tcp"
   }
