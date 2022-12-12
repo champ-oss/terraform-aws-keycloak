@@ -24,7 +24,6 @@ module "keycloak" {
 
   healthcheck                       = "/admin"
   health_check_grace_period_seconds = 300
-  port        = 7600
   environment = {
     KC_DB_URL_HOST                 = module.aurora.endpoint
     KC_DB_URL_DATABASE             = module.aurora.database_name
