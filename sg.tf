@@ -1,4 +1,3 @@
-/*
 resource "aws_security_group_rule" "jgroups" {
   type              = "ingress"
   from_port         = 0
@@ -7,5 +6,3 @@ resource "aws_security_group_rule" "jgroups" {
   self              = true
   security_group_id = module.core.ecs_app_security_group
 }
-
-*/
