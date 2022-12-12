@@ -39,12 +39,9 @@ module "keycloak" {
     KC_HTTP_ENABLED                = var.http_enabled
     KC_PROXY                       = var.proxy
     PROXY_ADDRESS_FORWARDING       = "true"
-    JGROUPS_DISCOVERY_PROTOCOL     = "JDBC_PING"
-    JGROUPS_DISCOVERY_PROPERTIES   = var.jgroups_discovery_properties
-    JAVA_OPTS                      = "-Djava.net.preferIPv4Stack=true -Djava.net.preferIPv4Addresses"
-    KC_CACHE_STACK                 = "tcp"
-    KC_CACHE_CONFIG_FILE           = "cache-ispn-jdbc-ping.xml"
-    KC_CACHE                       = "ispn"
+    # JGROUPS_DISCOVERY_PROTOCOL     = "JDBC_PING"
+    # JGROUPS_DISCOVERY_PROPERTIES   = var.jgroups_discovery_properties
+    "JAVA_OPTS": "-Xms64m -Xmx2048m -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Stack=true -Djgroups.s3.region_name=us-east-2  -Djgroups.s3.bucket_name=${module.s3.bucket}"
   }
   ## passing passwords as secrets
   secrets = {
