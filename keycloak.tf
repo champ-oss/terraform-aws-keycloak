@@ -39,11 +39,9 @@ module "keycloak" {
     KC_HTTP_ENABLED                = var.http_enabled
     KC_PROXY                       = var.proxy
     PROXY_ADDRESS_FORWARDING       = "true"
-    # JGROUPS_DISCOVERY_PROTOCOL     = "JDBC_PING"
-    # JGROUPS_DISCOVERY_PROPERTIES   = var.jgroups_discovery_properties
-    KC_CACHE       = "ispn"
-    KC_CACHE_STACK = "ec2"
-    "JAVA_OPTS" : "-Xms64m -Xmx2048m -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Stack=true -Djgroups.s3.region_name=us-east-2  -Djgroups.s3.bucket_name=${module.s3.bucket}"
+    KC_CACHE                       = "ispn"
+    KC_CACHE_STACK                 = "ec2"
+    "JAVA_OPTS" : "-Xms64m -Xmx2048m -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Stack=true -Djgroups.s3.region_name=${data.aws_region.current.name}  -Djgroups.s3.bucket_name=${module.s3.bucket}"
   }
   ## passing passwords as secrets
   secrets = {
@@ -59,11 +57,4 @@ module "keycloak" {
   slack_url              = var.cloudwatch_slack_url != "" ? var.cloudwatch_slack_url : null
   filter_pattern         = var.filter_pattern != "" ? var.filter_pattern : null
   depends_on             = [module.aurora]
-
-  # sticky session on lb
-  stickiness = [{
-    enabled : true,
-    type : "lb_cookie"
-    cookie_duration : 43200,
-  }]
 }

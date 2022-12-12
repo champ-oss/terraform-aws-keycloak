@@ -1,3 +1,5 @@
+data "aws_region" "current" {}
+
 resource "random_string" "identifier" {
   length  = 5
   special = false
