@@ -24,6 +24,7 @@ module "keycloak" {
 
   healthcheck                       = "/admin"
   health_check_grace_period_seconds = 300
+  port        = 7600
   environment = {
     KC_DB_URL_HOST                 = module.aurora.endpoint
     KC_DB_URL_DATABASE             = module.aurora.database_name
@@ -41,7 +42,7 @@ module "keycloak" {
     PROXY_ADDRESS_FORWARDING       = "true"
     JGROUPS_DISCOVERY_PROTOCOL     = "JDBC_PING"
     JGROUPS_DISCOVERY_PROPERTIES   = var.jgroups_discovery_properties
-    JAVA_OPTS_APPEND               = "-Dignore.bind.address=true"
+    JAVA_OPTS_APPEND               = "-Djboss.bind.address=127.0.0.1"
   }
   ## passing passwords as secrets
   secrets = {
