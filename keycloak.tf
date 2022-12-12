@@ -42,6 +42,7 @@ module "keycloak" {
     JGROUPS_DISCOVERY_PROTOCOL     = "JDBC_PING"
     JGROUPS_DISCOVERY_PROPERTIES   = var.jgroups_discovery_properties
     JAVA_OPTS_APPEND               = "-Djboss.bind.address=127.0.0.1 -Djava.net.preferIPv4Stack=true"
+    KC_CACHE_STACK                 = "tcp"
   }
   ## passing passwords as secrets
   secrets = {
