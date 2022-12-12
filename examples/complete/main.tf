@@ -63,5 +63,5 @@ module "this" {
   zone_id             = data.aws_route53_zone.this.zone_id
   protect             = false
   skip_final_snapshot = true
-  app_command         = ["start --cache-config-file=cache-ispn-jdbc-ping.xml --cache=ispn --cache-stack=ec2"]
+  app_command         = ["start --cache-config-file=cache-ispn-jdbc-ping.xml --cache=ispn --cache-stack=tcp"]
 }
