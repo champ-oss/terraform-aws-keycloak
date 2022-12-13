@@ -76,7 +76,7 @@ variable "certificate_arn" {
 variable "image_shared_keycloak" {
   description = "Docker image for keycloak"
   type        = string
-  default     = "quay.io/keycloak/keycloak:20.0.1"
+  default     = "docker.io/champtitles/keycloak:ba043636a7637e4c77a8dc5dbea8d0c9a40d6281"
 }
 
 variable "tags" {
@@ -148,7 +148,7 @@ variable "http_enabled" {
 variable "hostname_strict_backchannel" {
   description = "https://www.keycloak.org/server/all-config#_httptls"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "hostname_strict_https" {
@@ -167,4 +167,18 @@ variable "kc_metrics_enabled" {
   description = "https://www.keycloak.org/server/all-config#_metrics"
   type        = bool
   default     = false
+}
+
+/*
+variable "jgroups_discovery_properties" {
+  description = "jgroups discovery properties"
+  type        = string
+  default     = "datasource_jndi_name=java:jboss/datasources/KeycloakDS,info_writer_sleep_time=500,remove_old_coords_on_view_change=true"
+}
+*/
+
+variable "app_command" {
+  description = "default command to run in ecs task definitions"
+  type        = list(string)
+  default     = ["start"]
 }

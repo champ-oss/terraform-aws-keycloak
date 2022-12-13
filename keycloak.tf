@@ -22,12 +22,13 @@ module "keycloak" {
   cpu      = "2048"
   memory   = "4096"
 
-  healthcheck                       = "/admin/"
+  healthcheck                       = "/admin"
   health_check_grace_period_seconds = 300
   environment = {
-    DB_ADDR                        = module.aurora.endpoint
-    DB_USER                        = module.aurora.master_username
-    DB_VENDOR                      = "mysql"
+    KC_DB_URL_HOST                 = module.aurora.endpoint
+    KC_DB_URL_DATABASE             = module.aurora.database_name
+    KC_DB_USERNAME                 = module.aurora.master_username
+    KC_DB                          = "mysql"
     KEYCLOAK_ADMIN                 = var.keycloak_admin_user
     KC_HEALTH_ENABLED              = var.healthcheck_enabled
     KC_METRICS_ENABLED             = var.kc_metrics_enabled
@@ -38,13 +39,16 @@ module "keycloak" {
     KC_HTTP_ENABLED                = var.http_enabled
     KC_PROXY                       = var.proxy
     PROXY_ADDRESS_FORWARDING       = "true"
+    KC_CACHE                       = "ispn"
+    KC_CACHE_STACK                 = "ec2"
+    "JAVA_OPTS" : "-Xms64m -Xmx2048m -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Stack=true -Djgroups.s3.region_name=${data.aws_region.current.name}  -Djgroups.s3.bucket_name=${module.s3.bucket}"
   }
   ## passing passwords as secrets
   secrets = {
-    DB_PASSWORD             = module.aurora.password_ssm_name
+    KC_DB_PASSWORD          = module.aurora.password_ssm_name
     KEYCLOAK_ADMIN_PASSWORD = aws_ssm_parameter.keycloak_password.name
   }
-  command      = ["start", "--optimized"]
+  command      = var.app_command
   min_capacity = var.app_min_capacity
   max_capacity = var.app_max_capacity
 
@@ -53,11 +57,4 @@ module "keycloak" {
   slack_url              = var.cloudwatch_slack_url != "" ? var.cloudwatch_slack_url : null
   filter_pattern         = var.filter_pattern != "" ? var.filter_pattern : null
   depends_on             = [module.aurora]
-
-  # sticky session on lb
-  stickiness = [{
-    enabled : true,
-    type : "lb_cookie"
-    cookie_duration : 43200,
-  }]
 }
