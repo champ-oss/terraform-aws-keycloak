@@ -63,4 +63,8 @@ module "this" {
   zone_id             = data.aws_route53_zone.this.zone_id
   protect             = false
   skip_final_snapshot = true
+<<<<<<< HEAD
+=======
+  app_command         = ["start"]
+>>>>>>> bc6d28a (native s3 ping)
 }
