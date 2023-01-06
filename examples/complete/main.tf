@@ -68,6 +68,6 @@ module "this" {
 module "keycloak_provider" {
   source            = "github.com/champ-oss/terraform-keycloak.git?ref=0abd3ff7d41229cc40772fa660134f362d15c20d"
   keyclaok_username = "admin"
-  Keycloak_password = module.this.keycloak_admin_password
+  keycloak_password = module.this.keycloak_admin_password
   keycloak_url      = module.this.keycloak_endpoint
 }
