@@ -64,3 +64,10 @@ module "this" {
   protect             = false
   skip_final_snapshot = true
 }
+
+module "keycloak_provider" {
+  source   = "github.com/champ-oss/terraform-keycloak.git?ref=0abd3ff7d41229cc40772fa660134f362d15c20d"
+  username = "admin"
+  password = module.this.keycloak_admin_password
+  url      = module.this.keycloak_endpoint
+}
