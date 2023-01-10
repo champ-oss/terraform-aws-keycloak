@@ -25,7 +25,6 @@ module "keycloak" {
   healthcheck                       = "/admin"
   health_check_grace_period_seconds = 300
   environment = {
-    KC_FEATURES                    = "admin-api"
     KC_DB_URL_HOST                 = module.aurora.endpoint
     KC_DB_URL_DATABASE             = module.aurora.database_name
     KC_DB_USERNAME                 = module.aurora.master_username
@@ -39,6 +38,8 @@ module "keycloak" {
     KC_HOSTNAME_STRICT_BACKCHANNEL = var.hostname_strict_backchannel
     KC_HTTP_ENABLED                = var.http_enabled
     KC_PROXY                       = var.proxy
+    KEYCLOAK_CLIENT_ID             = "terraform-keycloak"
+    KEYCLOAK_CLIENT_SECRET         = random_password.keycloak_client_secret.result
     PROXY_ADDRESS_FORWARDING       = "true"
     KC_CACHE                       = "ispn"
     KC_CACHE_STACK                 = "ec2"

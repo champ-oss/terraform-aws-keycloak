@@ -13,6 +13,15 @@ resource "random_password" "shared_keycloak" {
   special = false
 }
 
+resource "random_password" "keycloak_client_secret" {
+  length  = 36
+  special = false
+  upper   = false
+  lower   = true
+  number  = true
+}
+
+
 module "core" {
   source             = "github.com/champ-oss/terraform-aws-core.git?ref=v1.0.110-d6bf5be"
   git                = var.git
