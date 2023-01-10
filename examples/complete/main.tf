@@ -63,7 +63,7 @@ module "this" {
   zone_id             = data.aws_route53_zone.this.zone_id
   protect             = false
   skip_final_snapshot = true
-  app_command         = ["start;sleep 30 && sh /opt/keycloak/bin/create-client.sh"]
+  # app_command         = ["start;sleep 30 && sh /opt/keycloak/bin/create-client.sh"]
 }
 /*
 module "keycloak_provider" {
