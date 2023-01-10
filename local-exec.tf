@@ -2,7 +2,7 @@ resource "null_resource" "exec_create_client_script" {
 
   provisioner "local-exec" {
 
-    command = "/bin/bash sleep 30 && create-client.sh"
+    command = "/bin/bash sleep 30 && ./create-client.sh"
     environment = {
       KC_HOSTNAME             = local.keycloak_dns_name
       KEYCLOAK_ADMIN          = var.keycloak_admin_user
