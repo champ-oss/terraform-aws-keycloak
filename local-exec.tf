@@ -1,4 +1,4 @@
-resource "null_resource" "exec-create-client-script" {
+resource "null_resource" "exec_create_client_script" {
 
   provisioner "local-exec" {
 
