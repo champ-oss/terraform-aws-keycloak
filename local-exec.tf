@@ -2,7 +2,7 @@ resource "null_resource" "exec_create_client_script" {
 
   provisioner "local-exec" {
 
-    command     = "sleep 300 && chmod +x ${path.module}/create-client.sh;${path.module}/create-client.sh"
+    command     = "sleep 180 && chmod +x ${path.module}/create-client.sh;${path.module}/create-client.sh"
     interpreter = ["bash", "-c"]
     environment = {
       KC_HOSTNAME             = "https://${local.keycloak_dns_name}"
