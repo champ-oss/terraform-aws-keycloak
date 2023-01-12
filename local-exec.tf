@@ -9,8 +9,12 @@ resource "null_resource" "exec_create_client_script" {
       KEYCLOAK_ADMIN          = var.keycloak_admin_user
       KEYCLOAK_ADMIN_PASSWORD = random_password.shared_keycloak.result
       KEYCLOAK_CLIENT_ID      = "terraform-client"
-      KEYCLOAK_CLIENT_SECRET  = random_password.keycloak_client_secret.result
+      KEYCLOAK_CLIENT_SECRET  = data.aws_ssm_parameter.keycloak.value
     }
   }
   depends_on = [module.keycloak]
+}
+
+data "aws_ssm_parameter" "keycloak" {
+  name = "keycloak_client_secret"
 }
