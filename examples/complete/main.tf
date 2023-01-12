@@ -1,6 +1,7 @@
 provider "aws" {
   region = "us-east-2"
 }
+provider "keycloak" {}
 
 terraform {
   backend "s3" {}
@@ -54,15 +55,16 @@ module "acm" {
 }
 
 module "this" {
-  source              = "../../"
-  certificate_arn     = module.acm.arn
-  public_subnet_ids   = data.aws_subnets.public.ids
-  private_subnet_ids  = data.aws_subnets.private.ids
-  vpc_id              = data.aws_vpcs.this.ids[0]
-  domain              = data.aws_route53_zone.this.name
-  zone_id             = data.aws_route53_zone.this.zone_id
-  protect             = false
-  skip_final_snapshot = true
+  source               = "../../"
+  certificate_arn      = module.acm.arn
+  public_subnet_ids    = data.aws_subnets.public.ids
+  private_subnet_ids   = data.aws_subnets.private.ids
+  vpc_id               = data.aws_vpcs.this.ids[0]
+  domain               = data.aws_route53_zone.this.name
+  zone_id              = data.aws_route53_zone.this.zone_id
+  protect              = false
+  skip_final_snapshot  = true
+  enable_create_client = true
 }
 
 module "keycloak_provider" {

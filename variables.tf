@@ -174,3 +174,9 @@ variable "app_command" {
   type        = list(string)
   default     = ["start"]
 }
+
+variable "enable_create_client" {
+  description = "enable or disable automated client for testing only"
+  default     = false
+  type        = bool
+}

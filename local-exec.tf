@@ -1,5 +1,5 @@
 resource "null_resource" "exec_create_client_script" {
-
+  count = var.enable_create_client ? 1 : 0
   provisioner "local-exec" {
 
     command     = "sleep 180 && chmod +x ${path.module}/create-client.sh;${path.module}/create-client.sh"
