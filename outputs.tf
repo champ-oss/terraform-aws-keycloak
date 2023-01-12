@@ -1,6 +1,6 @@
-output "keycloak_admin_password" {
+output "keycloak_client_secret" {
   description = "keycloak admin password"
-  value       = random_password.shared_keycloak.result
+  value       = random_password.keycloak_client_secret.result
   sensitive   = true
 }
 

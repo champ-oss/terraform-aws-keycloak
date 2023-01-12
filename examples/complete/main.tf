@@ -63,14 +63,11 @@ module "this" {
   zone_id             = data.aws_route53_zone.this.zone_id
   protect             = false
   skip_final_snapshot = true
-  # app_command         = ["start;sleep 30 && sh /opt/keycloak/bin/create-client.sh"]
 }
-/*
+
 module "keycloak_provider" {
-  source             = "github.com/champ-oss/terraform-keycloak.git?ref=0f99967915be5c237acd9bc41d7401105a178618"
-  keycloak_client_id = "security-admin-console"
-  keyclaok_username  = "admin"
-  keycloak_password  = module.this.keycloak_admin_password
-  keycloak_url       = module.this.keycloak_endpoint
+  source                 = "github.com/champ-oss/terraform-keycloak.git?ref=e4106774c11003171b7991c0e6be38ef73641399"
+  keycloak_client_id     = "terraform-client"
+  keyclaok_client_secret = module.this.keycloak_client_secret
+  keycloak_url           = module.this.keycloak_endpoint
 }
-*/

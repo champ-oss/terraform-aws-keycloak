@@ -38,8 +38,6 @@ module "keycloak" {
     KC_HOSTNAME_STRICT_BACKCHANNEL = var.hostname_strict_backchannel
     KC_HTTP_ENABLED                = var.http_enabled
     KC_PROXY                       = var.proxy
-    KEYCLOAK_CLIENT_ID             = "admin-cli"
-    KEYCLOAK_CLIENT_SECRET         = random_password.keycloak_client_secret.result
     PROXY_ADDRESS_FORWARDING       = "true"
     KC_CACHE                       = "ispn"
     KC_CACHE_STACK                 = "ec2"
