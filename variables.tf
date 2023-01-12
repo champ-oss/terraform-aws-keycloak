@@ -76,7 +76,7 @@ variable "certificate_arn" {
 variable "image_shared_keycloak" {
   description = "Docker image for keycloak"
   type        = string
-  default     = "docker.io/champtitles/keycloak:d736f10e34868841a3b92ed90659ec839c572bfc"
+  default     = "docker.io/champtitles/keycloak:81d8fea6de0c14d2b8cdefe8880b39a3d04a8991"
 }
 
 variable "tags" {
