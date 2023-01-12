@@ -1,7 +1,6 @@
 provider "aws" {
   region = "us-east-2"
 }
-provider "keycloak" {}
 
 terraform {
   backend "s3" {}
