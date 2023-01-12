@@ -2,12 +2,6 @@ provider "aws" {
   region = "us-east-2"
 }
 
-provider "keycloak" {
-  client_id     = "terraform-client"
-  client_secret = module.this.keycloak_client_secret
-  url           = module.this.keycloak_endpoint
-}
-
 terraform {
   backend "s3" {}
 }
@@ -72,5 +66,8 @@ module "this" {
 }
 
 module "keycloak_provider" {
-  source                 = "github.com/champ-oss/terraform-keycloak.git?ref=26acee54943be499ea98329b4ecbac8d73e1b82b"
+  source                 = "github.com/champ-oss/terraform-keycloak.git?ref=501ec43c7d4cfa5561df424e6a6d11385e21c61e"
+  keycloak_client_id     = "terraform-client"
+  keycloak_cliend_secret = module.this.keycloak_client_secret
+  keycloak_url           = module.this.keycloak_endpoint
 }
