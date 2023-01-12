@@ -67,5 +67,5 @@ module "this" {
 }
 
 module "keycloak_provider" {
-  source     = "github.com/champ-oss/terraform-keycloak.git?ref=1eb27c8cac6102d164f8e5640f4af310d480c9a3"
+  source = "github.com/champ-oss/terraform-keycloak.git?ref=8ce5a43231af7b205476705991be257af1809d63"
 }
