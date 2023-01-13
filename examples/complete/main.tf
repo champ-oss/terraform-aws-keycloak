@@ -74,23 +74,6 @@ module "smtp_user" {
   source = "github.com/champ-oss/terraform-aws-ses-smtp-users.git?ref=16f7459841043af28c0875976460ebbb8fde4005"
 }
 
-
-module "keycloak" {
-  source        = "github.com/champ-oss/terraform-keycloak.git?ref=13ac381f9c69d4b61e9fb059554cea3a6cdb3b45"
-  client_id     = "terraform-client"
-  client_secret = data.aws_ssm_parameter.keycloak.value
-  url           = module.this.keycloak_endpoint
-  realm         = "test"
-  attributes = {
-    foo : "bar"
-  }
-  smtp_host     = "email-smtp.us-east-2.amazonaws.com"
-  email_from    = "example@example.com"
-  smtp_username = module.smtp_user.smtp_username
-  smtp_password = module.smtp_user.smtp_password
-}
-
-
 module "keycloak_main" {
   source        = "github.com/champ-oss/terraform-keycloak.git?ref=13ac381f9c69d4b61e9fb059554cea3a6cdb3b45"
   client_id     = "terraform-client"
