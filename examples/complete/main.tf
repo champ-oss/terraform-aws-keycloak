@@ -70,6 +70,13 @@ data "aws_ssm_parameter" "keycloak" {
   name = "keycloak_client_secret"
 }
 
+module "keycloak" {
+  source        = "github.com/champ-oss/terraform-keycloak.git?ref=fdf79f0de3653d1694a0ea4591e301e3dee0db51"
+  client_id     = "terraform-client"
+  client_secret = data.aws_ssm_parameter.keycloak.value
+  url           = module.this.keycloak_endpoint
+}
+
 module "keycloak_main" {
   source        = "github.com/champ-oss/terraform-keycloak.git?ref=fdf79f0de3653d1694a0ea4591e301e3dee0db51"
   client_id     = "terraform-client"
