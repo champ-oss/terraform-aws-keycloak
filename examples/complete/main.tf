@@ -44,10 +44,6 @@ data "aws_subnets" "public" {
   }
 }
 
-data "aws_ssm_parameter" "keycloak" {
-  name = "keycloak_client_secret"
-}
-
 module "acm" {
   source            = "github.com/champ-oss/terraform-aws-acm.git?ref=v1.0.110-61ad6b7"
   git               = local.git
@@ -68,14 +64,4 @@ module "this" {
   protect              = false
   skip_final_snapshot  = true
   enable_create_client = true
-}
-
-provider "keycloak" {
-  client_id     = "terraform-client"
-  client_secret = data.aws_ssm_parameter.keycloak.value
-  url           = module.this.keycloak_endpoint
-}
-
-module "keycloak_provider" {
-  source = "github.com/champ-oss/terraform-keycloak.git?ref=05aa878fb27a8b1a45807411a07c095372555ff5"
 }
