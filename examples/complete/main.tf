@@ -75,6 +75,10 @@ module "keycloak" {
   client_id     = "terraform-client"
   client_secret = data.aws_ssm_parameter.keycloak.value
   url           = module.this.keycloak_endpoint
+  realm         = "test"
+  attributes = {
+    foo : "bar"
+  }
 }
 
 module "keycloak_main" {
