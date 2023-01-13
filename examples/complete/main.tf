@@ -65,3 +65,14 @@ module "this" {
   skip_final_snapshot  = true
   enable_create_client = true
 }
+
+data "aws_ssm_parameter" "keycloak" {
+  name = "keycloak_client_secret"
+}
+
+module "keycloak" {
+  source = "github.com/champ-oss/terraform-keycloak.git?ref=88256efc24fdd747b2c00293b0bd411b8fe0438d"
+  client_id     = "terraform-client"
+  client_secret = data.aws_ssm_parameter.keycloak.value
+  url           = module.this.keycloak_endpoint
+}
