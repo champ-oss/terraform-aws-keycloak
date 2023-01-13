@@ -21,6 +21,7 @@ func TestExamplesComplete(t *testing.T) {
 		Vars:    map[string]interface{}{},
 	}
 	terraform.Init(t, terraformOptions)
+	terrafrom.import()
 	// recursively set prevent destroy to false
 	cmd := exec.Command("bash", "-c", "find . -type f -name '*.tf' -exec sed -i'' -e 's/prevent_destroy = true/prevent_destroy = false/g' {} +")
 	cmd.Dir = "../../"
