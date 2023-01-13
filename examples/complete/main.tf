@@ -71,7 +71,7 @@ data "aws_ssm_parameter" "keycloak" {
 }
 
 module "smtp_user" {
-  source = "github.com/champ-oss/terraform-aws-ses-smtp-users.git?ref=v1.0.1-162887a"
+  source = "github.com/champ-oss/terraform-aws-ses-smtp-users.git?ref=16f7459841043af28c0875976460ebbb8fde4005"
 }
 
 
