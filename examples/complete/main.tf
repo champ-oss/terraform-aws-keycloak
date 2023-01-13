@@ -71,7 +71,7 @@ data "aws_ssm_parameter" "keycloak" {
 }
 
 module "keycloak" {
-  source        = "github.com/champ-oss/terraform-keycloak.git?ref=fdf79f0de3653d1694a0ea4591e301e3dee0db51"
+  source = "github.com/champ-oss/terraform-keycloak.git?ref=fdf79f0de3653d1694a0ea4591e301e3dee0db51"
   for_each = toset([
     "dev",
     "test",
@@ -82,6 +82,6 @@ module "keycloak" {
   url           = module.this.keycloak_endpoint
   realm         = each.value
   attributes {
-    foo = "bar",
+    foo = "bar"
   }
 }
