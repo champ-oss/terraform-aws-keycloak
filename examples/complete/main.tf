@@ -71,18 +71,19 @@ data "aws_ssm_parameter" "keycloak" {
 }
 
 module "keycloak" {
-  source        = "github.com/champ-oss/terraform-keycloak.git?ref=fdf79f0de3653d1694a0ea4591e301e3dee0db51"
+  source        = "github.com/champ-oss/terraform-keycloak.git?ref=496b0f7e777b0d4dc068307ac8b09451d823fb1f"
   client_id     = "terraform-client"
   client_secret = data.aws_ssm_parameter.keycloak.value
   url           = module.this.keycloak_endpoint
   realm         = "test"
+  enabled       = false
   attributes = {
     foo : "bar"
   }
 }
 
 module "keycloak_main" {
-  source        = "github.com/champ-oss/terraform-keycloak.git?ref=fdf79f0de3653d1694a0ea4591e301e3dee0db51"
+  source        = "github.com/champ-oss/terraform-keycloak.git?ref=496b0f7e777b0d4dc068307ac8b09451d823fb1f"
   client_id     = "terraform-client"
   client_secret = data.aws_ssm_parameter.keycloak.value
   url           = module.this.keycloak_endpoint
