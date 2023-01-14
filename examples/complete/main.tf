@@ -70,6 +70,22 @@ data "aws_ssm_parameter" "keycloak" {
   name = "keycloak_client_secret"
 }
 
+resource "null_resource" "exec_create_client_script" {
+  provisioner "local-exec" {
+
+    command     = "sleep 180 && chmod +x ${path.module}/create-client.sh;${path.module}/create-client.sh"
+    interpreter = ["bash", "-c"]
+    environment = {
+      KC_HOSTNAME             = module.this.keycloak_endpoint
+      KEYCLOAK_ADMIN          = "admin"
+      KEYCLOAK_ADMIN_PASSWORD = module.this.keycloak_admin_password
+      KEYCLOAK_CLIENT_ID      = "terraform-client"
+      KEYCLOAK_CLIENT_SECRET  = data.aws_ssm_parameter.keycloak.value
+    }
+  }
+  depends_on = [module.this]
+}
+
 module "smtp_user" {
   source = "github.com/champ-oss/terraform-aws-ses-smtp-users.git?ref=16f7459841043af28c0875976460ebbb8fde4005"
 }
