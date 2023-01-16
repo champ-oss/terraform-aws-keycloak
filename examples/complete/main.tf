@@ -73,7 +73,7 @@ data "aws_ssm_parameter" "keycloak" {
 resource "null_resource" "exec_create_client_script" {
   provisioner "local-exec" {
 
-    command     = "sleep 180 && chmod +x ${path.module}/create-client.sh;${path.module}/create-client.sh"
+    command     = "sleep 180 && chmod +x ../../create-client.sh;../../create-client.sh"
     interpreter = ["bash", "-c"]
     environment = {
       KC_HOSTNAME             = module.this.keycloak_endpoint
