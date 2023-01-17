@@ -175,8 +175,8 @@ variable "app_command" {
   default     = ["start"]
 }
 
-variable "enable_create_client" {
-  description = "enable or disable automated client for testing only"
-  default     = false
+variable "enable_cluster" {
+  description = "enable or disable keycloak and db cluster"
+  default     = true
   type        = bool
 }
