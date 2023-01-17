@@ -26,9 +26,9 @@ module "keycloak_aurora" {
   healthcheck                       = "/admin"
   health_check_grace_period_seconds = 300
   environment = {
-    KC_DB_URL_HOST                 = module.aurora.endpoint
-    KC_DB_URL_DATABASE             = module.aurora.database_name
-    KC_DB_USERNAME                 = module.aurora.master_username
+    KC_DB_URL_HOST                 = module.aurora[0].endpoint
+    KC_DB_URL_DATABASE             = module.aurora[0].database_name
+    KC_DB_USERNAME                 = module.aurora[0].master_username
     KC_DB                          = "mysql"
     KEYCLOAK_ADMIN                 = var.keycloak_admin_user
     KC_HEALTH_ENABLED              = var.healthcheck_enabled
@@ -46,7 +46,7 @@ module "keycloak_aurora" {
   }
   ## passing passwords as secrets
   secrets = {
-    KC_DB_PASSWORD          = module.aurora.password_ssm_name
+    KC_DB_PASSWORD          = module.aurora[0].password_ssm_name
     KEYCLOAK_ADMIN_PASSWORD = aws_ssm_parameter.keycloak_password.name
   }
   command      = var.app_command
@@ -113,5 +113,4 @@ module "keycloak_local" {
   enable_lambda_cw_alert = var.enable_lambda_cw_alert
   slack_url              = var.cloudwatch_slack_url != "" ? var.cloudwatch_slack_url : null
   filter_pattern         = var.filter_pattern != "" ? var.filter_pattern : null
-  depends_on             = [module.aurora]
 }
