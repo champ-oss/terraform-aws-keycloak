@@ -24,9 +24,6 @@ env:
   NEW_RELIC_API_KEY: ${{ secrets.NEW_RELIC_API_KEY }}
   NEW_RELIC_REGION: ${{ secrets.NEW_RELIC_REGION }}
   NEW_RELIC_ACCOUNT_ID: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
-  KEYCLOAK_CLIENT_ID: "terraform-client"
-  KEYCLOAK_URL: ${{ secrets.KEYCLOAK_URL }}
-  KEYCLOAK_CLIENT_SECRET: ${{ secrets.KEYCLOAK_CLIENT_SECRET }}
 
 defaults:
   run:
