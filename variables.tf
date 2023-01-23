@@ -76,7 +76,7 @@ variable "certificate_arn" {
 variable "image_shared_keycloak" {
   description = "Docker image for keycloak"
   type        = string
-  default     = "docker.io/champtitles/keycloak:ba043636a7637e4c77a8dc5dbea8d0c9a40d6281"
+  default     = "docker.io/champtitles/keycloak:81d8fea6de0c14d2b8cdefe8880b39a3d04a8991"
 }
 
 variable "tags" {
@@ -169,16 +169,14 @@ variable "kc_metrics_enabled" {
   default     = false
 }
 
-/*
-variable "jgroups_discovery_properties" {
-  description = "jgroups discovery properties"
-  type        = string
-  default     = "datasource_jndi_name=java:jboss/datasources/KeycloakDS,info_writer_sleep_time=500,remove_old_coords_on_view_change=true"
-}
-*/
-
 variable "app_command" {
   description = "default command to run in ecs task definitions"
   type        = list(string)
   default     = ["start"]
+}
+
+variable "enable_cluster" {
+  description = "enable or disable keycloak and db cluster"
+  default     = true
+  type        = bool
 }

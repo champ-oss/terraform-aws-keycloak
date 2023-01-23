@@ -9,7 +9,6 @@ import (
 
 // TestExamplesComplete tests a typical deployment of this module
 func TestExamplesComplete(t *testing.T) {
-	t.Parallel()
 
 	terraformOptions := &terraform.Options{
 		TerraformDir: "../../examples/complete",
