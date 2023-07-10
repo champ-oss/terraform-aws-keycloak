@@ -1,6 +1,6 @@
 module "keycloak_aurora" {
   count                 = var.enable_cluster ? 1 : 0
-  source                = "github.com/champ-oss/terraform-aws-app.git?ref=v1.0.196-85144c8"
+  source                = "github.com/champ-oss/terraform-aws-app.git?ref=v1.0.197-e4b09a2"
   git                   = "${var.git}-${random_string.identifier.result}"
   vpc_id                = var.vpc_id
   subnets               = var.private_subnet_ids
