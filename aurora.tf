@@ -1,6 +1,6 @@
 module "aurora" {
   count                     = var.enable_cluster ? 1 : 0
-  source                    = "github.com/champ-oss/terraform-aws-aurora.git?ref=v1.0.38-b8ce3cd"
+  source                    = "github.com/champ-oss/terraform-aws-aurora.git?ref=v1.0.41-e5f1024"
   cluster_identifier_prefix = var.git
   private_subnet_ids        = var.private_subnet_ids
   vpc_id                    = var.vpc_id
@@ -11,4 +11,6 @@ module "aurora" {
   metric_alarms_enabled     = var.metric_alarms_enabled
   skip_final_snapshot       = var.skip_final_snapshot
   protect                   = var.protect
+  create_dms_endpoint       = var.create_dms_endpoint
+  dms_endpoint_type         = var.dms_endpoint_type
 }
