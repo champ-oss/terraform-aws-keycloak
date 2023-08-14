@@ -180,3 +180,15 @@ variable "enable_cluster" {
   default     = true
   type        = bool
 }
+
+variable "create_dms_endpoint" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dms_endpoint"
+  type        = bool
+  default     = false
+}
+
+variable "dms_endpoint_type" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dms_endpoint#endpoint_type"
+  type        = string
+  default     = "source"
+}
