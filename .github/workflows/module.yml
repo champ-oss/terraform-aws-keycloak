@@ -66,10 +66,14 @@ jobs:
         with:
           terraform_version: 1.5.5 # https://github.com/hashicorp/terraform/releases
           terraform_wrapper: false
+      - name: prep
+        shell: bash
+        run: |
+          echo "TF_VAR_git=$(echo ${GITHUB_REPOSITORY} | sed -e 's|.*/||')" >> $GITHUB_ENV
       - name: copy lockfile
         run: cp ../complete/.terraform.lock.hcl . || true
       - name: init
-        run: terraform init
+        run: terraform init -backend-config key=${TF_VAR_git} -backend-config bucket=${TF_STATE_BUCKET}
       - name: validate
         run: terraform validate
       - name: plan
@@ -87,9 +91,6 @@ jobs:
             export $key=$value
           done
           if [ -f test.sh ]; then bash test.sh; fi
-      - name: destroy
-        if: always()
-        run: terraform destroy -auto-approve
   check-examples:
     needs: run-example
     runs-on: ubuntu-latest
