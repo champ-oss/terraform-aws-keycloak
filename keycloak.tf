@@ -1,6 +1,6 @@
 module "keycloak_cluster" {
   count                 = var.enable_cluster ? 1 : 0
-  source                = "github.com/champ-oss/terraform-aws-app.git?ref=v1.0.227-f23ea10"
+  source                = "github.com/champ-oss/terraform-aws-app.git?ref=v1.0.228-142bc80"
   git                   = var.git
   vpc_id                = var.vpc_id
   subnets               = var.private_subnet_ids
