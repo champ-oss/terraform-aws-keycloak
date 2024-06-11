@@ -51,6 +51,7 @@ module "keycloak_cluster" {
   }
   command                            = var.app_command
   autoscaling_predefined_metric_type = "ALBRequestCountPerTarget"
+  alb_arn_suffix                     = module.core.lb_public_arn_suffix
   autoscaling_target_value           = var.autoscaling_target_value
   min_capacity                       = var.app_min_capacity
   max_capacity                       = var.app_max_capacity
