@@ -1,7 +1,7 @@
-module "keycloak_aurora" {
+module "keycloak_cluster" {
   count                 = var.enable_cluster ? 1 : 0
   source                = "github.com/champ-oss/terraform-aws-app.git?ref=v1.0.227-f23ea10"
-  git                   = "${var.git}-${random_string.identifier.result}"
+  git                   = var.git
   vpc_id                = var.vpc_id
   subnets               = var.private_subnet_ids
   cluster               = module.core.ecs_cluster_name
@@ -17,13 +17,13 @@ module "keycloak_aurora" {
   lb_zone_id   = module.core.lb_public_zone_id
 
   # app specific variables
-  name     = "keycloak"
+  name     = var.kc_app_name
   dns_name = local.keycloak_dns_name
   image    = var.image_shared_keycloak
-  cpu      = "2048"
-  memory   = "4096"
+  cpu      = var.ecs_keycloak_cpu
+  memory   = var.ecs_keycloak_memory
 
-  healthcheck                       = "/admin"
+  healthcheck                       = "/auth/realms/master"
   health_check_grace_period_seconds = 300
   environment = {
     KC_DB_URL_HOST                 = module.aurora[0].endpoint
@@ -42,16 +42,18 @@ module "keycloak_aurora" {
     PROXY_ADDRESS_FORWARDING       = "true"
     KC_CACHE                       = "ispn"
     KC_CACHE_STACK                 = "ec2"
-    "JAVA_OPTS" : "-Xms64m -Xmx2048m -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Stack=true -Djgroups.s3.region_name=${data.aws_region.current.name}  -Djgroups.s3.bucket_name=${module.s3.bucket}"
+    "JAVA_OPTS" : "-Xms512m -Xmx2048m -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -Dquarkus.http.root-path=/auth -Djava.net.preferIPv4Stack=true -Djgroups.s3.region_name=${data.aws_region.current.name} -Djgroups.s3.bucket_name=${module.s3.bucket}"
   }
   ## passing passwords as secrets
   secrets = {
     KC_DB_PASSWORD          = module.aurora[0].password_ssm_name
     KEYCLOAK_ADMIN_PASSWORD = aws_ssm_parameter.keycloak_password.name
   }
-  command      = var.app_command
-  min_capacity = var.app_min_capacity
-  max_capacity = var.app_max_capacity
+  command                            = var.app_command
+  autoscaling_predefined_metric_type = "ALBRequestCountPerTarget"
+  autoscaling_target_value           = var.autoscaling_target_value
+  min_capacity                       = var.app_min_capacity
+  max_capacity                       = var.app_max_capacity
 
   # enable slack error alerting
   enable_lambda_cw_alert = var.enable_lambda_cw_alert
@@ -63,7 +65,7 @@ module "keycloak_aurora" {
 module "keycloak_local" {
   count                 = var.enable_cluster ? 0 : 1
   source                = "github.com/champ-oss/terraform-aws-app.git?ref=v1.0.227-f23ea10"
-  git                   = "${var.git}-${random_string.identifier.result}"
+  git                   = var.git
   vpc_id                = var.vpc_id
   subnets               = var.private_subnet_ids
   cluster               = module.core.ecs_cluster_name
@@ -82,8 +84,8 @@ module "keycloak_local" {
   name     = "keycloak"
   dns_name = local.keycloak_dns_name
   image    = var.image_shared_keycloak
-  cpu      = "2048"
-  memory   = "4096"
+  cpu      = "1024"
+  memory   = "2048"
 
   healthcheck                       = "/admin"
   health_check_grace_period_seconds = 300
@@ -101,7 +103,7 @@ module "keycloak_local" {
     PROXY_ADDRESS_FORWARDING       = "true"
     KC_CACHE                       = "ispn"
     KC_CACHE_STACK                 = "ec2"
-    "JAVA_OPTS" : "-Xms64m -Xmx2048m -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Stack=true -Djgroups.s3.region_name=${data.aws_region.current.name}  -Djgroups.s3.bucket_name=${module.s3.bucket}"
+    "JAVA_OPTS" : "-Xms512m -Xmx2048m -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Stack=true -Djgroups.s3.region_name=${data.aws_region.current.name}  -Djgroups.s3.bucket_name=${module.s3.bucket}"
   }
   ## passing passwords as secrets
   secrets = {

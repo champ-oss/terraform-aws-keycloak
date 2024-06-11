@@ -1,13 +1,5 @@
 data "aws_region" "current" {}
 
-resource "random_string" "identifier" {
-  length  = 5
-  special = false
-  upper   = false
-  lower   = true
-  number  = true
-}
-
 resource "random_password" "shared_keycloak" {
   length  = 32
   special = false

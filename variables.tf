@@ -1,5 +1,5 @@
 locals {
-  keycloak_dns_name = var.keycloak_hostname != null ? "${var.keycloak_hostname}.${var.domain}" : "keycloak-${random_string.identifier.result}.${var.domain}"
+  keycloak_dns_name = var.keycloak_hostname != null ? var.keycloak_hostname : "${var.keycloak_hostname}.${var.domain}"
   tags = {
     cost    = "shared"
     creator = "terraform"
@@ -7,16 +7,16 @@ locals {
   }
 }
 
-variable "aurora_max_capacity" {
+variable "kc_aurora_max_capacity" {
   description = "https://www.terraform.io/docs/providers/aws/r/rds_cluster.html#max_capacity"
   type        = number
-  default     = 10
+  default     = 8
 }
 
-variable "aurora_min_capacity" {
-  description = "aurora cluster count"
+variable "kc_aurora_min_capacity" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#min_capacity"
   type        = number
-  default     = 2
+  default     = 0.5
 }
 
 variable "metric_alarms_enabled" {
@@ -88,13 +88,13 @@ variable "tags" {
 variable "app_max_capacity" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/appautoscaling_target#max_capacity"
   type        = number
-  default     = 10
+  default     = 20
 }
 
 variable "app_min_capacity" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/appautoscaling_target#min_capacity"
   type        = number
-  default     = 2
+  default     = 1
 }
 
 variable "cloudwatch_slack_url" {
@@ -191,4 +191,70 @@ variable "dms_endpoint_type" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dms_endpoint#endpoint_type"
   type        = string
   default     = "source"
+}
+
+variable "autoscaling_target_value" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/appautoscaling_target#scalable_dimension"
+  type        = number
+  default     = 100
+}
+
+variable "ecs_keycloak_cpu" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_task_definition#cpu"
+  type        = number
+  default     = 1024
+}
+
+variable "ecs_keycloak_memory" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_task_definition#memory"
+  type        = number
+  default     = 2048
+}
+
+variable "kc_aurora_identifier_prefix" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#identifier"
+  type        = string
+  default     = "keycloak"
+}
+
+variable "kc_aurora_cluster_instance_count" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster_instance"
+  type        = number
+  default     = 1
+}
+
+variable "alarms_email" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sns_topic_subscription#endpoint"
+  type        = string
+  default     = null
+}
+
+variable "aurora_shared_accounts" {
+  description = "AWS accounts to share the RDS cluster"
+  type        = list(string)
+  default     = []
+}
+
+variable "source_cluster_identifier" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#source_cluster_identifier"
+  type        = string
+  default     = null
+}
+
+variable "db_cluster_parameter_group_name" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#db_cluster_parameter_group_name"
+  type        = string
+  default     = null
+}
+
+variable "kc_db_snapshot_identifier" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster#snapshot_identifier"
+  type        = string
+  default     = null
+}
+
+variable "kc_app_name" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_service#name"
+  type        = string
+  default     = "keycloak"
 }
