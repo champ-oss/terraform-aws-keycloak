@@ -84,7 +84,7 @@ module "this" {
   subnets                  = data.aws_subnets.private.ids
   zone_id                  = data.aws_route53_zone.this.zone_id
   cluster_name             = module.core.ecs_cluster_name
-  source_security_group_id = [module.core.ecs_app_security_group]
+  security_groups          = [module.core.ecs_app_security_group]
   execution_role_arn       = module.core.execution_ecs_role_arn
   listener_arn             = module.core.lb_public_listener_arn
   lb_dns_name              = module.core.lb_public_dns_name
@@ -92,4 +92,6 @@ module "this" {
   dns_name                 = "keycloak.${data.aws_route53_zone.this.name}"
   protect                  = false
   skip_final_snapshot      = true
+  private_subnet_ids       = data.aws_subnets.private.ids
+  source_security_group_id = module.core.ecs_app_security_group
 }
