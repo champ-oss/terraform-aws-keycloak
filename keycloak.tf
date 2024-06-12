@@ -83,7 +83,7 @@ module "keycloak_local" {
 
   # app specific variables
   name     = "keycloak"
-  dns_name = local.keycloak_dns_name
+  dns_name = var.keycloak_hostname
   image    = var.image_shared_keycloak
   cpu      = "1024"
   memory   = "2048"

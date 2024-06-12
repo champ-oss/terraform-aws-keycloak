@@ -1,5 +1,4 @@
 locals {
-  keycloak_dns_name = var.keycloak_hostname != null ? var.keycloak_hostname : "${var.keycloak_hostname}.${var.domain}"
   tags = {
     cost    = "shared"
     creator = "terraform"
@@ -39,11 +38,6 @@ variable "protect" {
 
 variable "zone_id" {
   description = "Route53 Zone ID"
-  type        = string
-}
-
-variable "domain" {
-  description = "Route53 Domain"
   type        = string
 }
 

@@ -73,7 +73,7 @@ module "this" {
   public_subnet_ids   = data.aws_subnets.public.ids
   private_subnet_ids  = data.aws_subnets.private.ids
   vpc_id              = data.aws_vpcs.this.ids[0]
-  domain              = data.aws_route53_zone.this.name
+  keycloak_hostname   = "keycloak.${data.aws_route53_zone.this.name}"
   zone_id             = data.aws_route53_zone.this.zone_id
   protect             = false
   skip_final_snapshot = true
