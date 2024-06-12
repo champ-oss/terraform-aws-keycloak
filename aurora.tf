@@ -3,7 +3,7 @@ module "aurora" {
   cluster_identifier_prefix       = var.kc_aurora_identifier_prefix
   private_subnet_ids              = var.private_subnet_ids
   vpc_id                          = var.vpc_id
-  source_security_group_id        = module.core.ecs_app_security_group
+  source_security_group_id        = var.source_security_group_id
   tags                            = merge(local.tags, var.tags)
   cluster_instance_count          = var.kc_aurora_cluster_instance_count
   min_capacity                    = var.kc_aurora_min_capacity

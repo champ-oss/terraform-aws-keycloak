@@ -58,6 +58,17 @@ data "aws_subnets" "public" {
   }
 }
 
+module "core" {
+  source             = "github.com/champ-oss/terraform-aws-core.git?ref=v1.0.117-1ea02a2"
+  git                = local.git
+  name               = local.git
+  vpc_id             = data.aws_vpcs.this.ids[0]
+  public_subnet_ids  = data.aws_subnets.public.ids
+  private_subnet_ids = data.aws_subnets.private.ids
+  protect            = false
+  certificate_arn    = module.acm.arn
+}
+
 module "acm" {
   source            = "github.com/champ-oss/terraform-aws-acm.git?ref=v1.0.116-cd36b2b"
   git               = local.git
@@ -70,11 +81,16 @@ module "acm" {
 module "this" {
   source              = "../../"
   certificate_arn     = module.acm.arn
-  public_subnet_ids   = data.aws_subnets.public.ids
-  private_subnet_ids  = data.aws_subnets.private.ids
   vpc_id              = data.aws_vpcs.this.ids[0]
-  keycloak_hostname   = "keycloak.${data.aws_route53_zone.this.name}"
+  subnets             = data.aws_subnets.private.ids
   zone_id             = data.aws_route53_zone.this.zone_id
+  cluster             = module.core.ecs_cluster_name
+  security_groups     = [module.core.ecs_app_security_group]
+  execution_role_arn  = module.core.execution_ecs_role_arn
+  listener_arn        = module.core.lb_public_listener_arn
+  lb_dns_name         = module.core.lb_public_dns_name
+  lb_zone_id          = module.core.lb_public_zone_id
+  keycloak_hostname   = "keycloak.${data.aws_route53_zone.this.name}"
   protect             = false
   skip_final_snapshot = true
 }

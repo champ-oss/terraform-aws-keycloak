@@ -3,17 +3,17 @@ module "keycloak_cluster" {
   git                   = var.git
   vpc_id                = var.vpc_id
   subnets               = var.private_subnet_ids
-  cluster               = module.core.ecs_cluster_name
+  cluster               = var.cluster_name
   zone_id               = var.zone_id
-  security_groups       = [module.core.ecs_app_security_group]
-  execution_role_arn    = module.core.execution_ecs_role_arn
+  security_groups       = var.security_groups
+  execution_role_arn    = var.execution_role_arn
   wait_for_steady_state = true
   tags                  = merge(local.tags, var.tags)
 
   # public service vs private service
-  listener_arn = module.core.lb_public_listener_arn
-  lb_dns_name  = module.core.lb_public_dns_name
-  lb_zone_id   = module.core.lb_public_zone_id
+  listener_arn = var.listener_arn
+  lb_dns_name  = var.lb_dns_name
+  lb_zone_id   = var.lb_zone_id
 
   # app specific variables
   name     = var.kc_app_name
@@ -50,7 +50,7 @@ module "keycloak_cluster" {
   }
   command                            = var.app_command
   autoscaling_predefined_metric_type = "ALBRequestCountPerTarget"
-  alb_arn_suffix                     = module.core.lb_public_arn_suffix
+  alb_arn_suffix                     = var.alb_arn_suffix
   autoscaling_target_value           = var.autoscaling_target_value
   min_capacity                       = var.app_min_capacity
   max_capacity                       = var.app_max_capacity

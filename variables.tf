@@ -39,6 +39,7 @@ variable "protect" {
 variable "zone_id" {
   description = "Route53 Zone ID"
   type        = string
+  default     = ""
 }
 
 variable "keycloak_hostname" {
@@ -245,4 +246,56 @@ variable "kc_app_name" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_service#name"
   type        = string
   default     = "keycloak"
+}
+
+variable "source_security_group_id" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule#source_security_group_id"
+  type        = string
+}
+
+variable "cluster_name" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_cluster#name"
+  type        = string
+}
+
+variable "security_groups" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_service#security_groups"
+  type        = list(string)
+  default     = []
+}
+
+variable "execution_role_arn" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_task_definition#execution_role_arn"
+  type        = string
+  default     = ""
+}
+
+variable "listener_arn" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener_rule#listener_arn"
+  type        = string
+  default     = ""
+}
+
+variable "dns_name" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record#name"
+  type        = string
+  default     = ""
+}
+
+variable "lb_dns_name" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb#dns_name"
+  type        = string
+  default     = ""
+}
+
+variable "lb_zone_id" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb#zone_id"
+  type        = string
+  default     = ""
+}
+
+variable "alb_arn_suffix" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/appautoscaling_target#resource_id"
+  type        = string
+  default     = ""
 }
