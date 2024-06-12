@@ -169,12 +169,6 @@ variable "app_command" {
   default     = ["start"]
 }
 
-variable "enable_cluster" {
-  description = "enable or disable keycloak and db cluster"
-  default     = true
-  type        = bool
-}
-
 variable "create_dms_endpoint" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dms_endpoint"
   type        = bool
