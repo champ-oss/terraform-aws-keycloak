@@ -18,7 +18,7 @@ module "keycloak_cluster" {
 
   # app specific variables
   name     = var.kc_app_name
-  dns_name = local.keycloak_dns_name
+  dns_name = var.keycloak_hostname
   image    = var.image_shared_keycloak
   cpu      = var.ecs_keycloak_cpu
   memory   = var.ecs_keycloak_memory
@@ -34,7 +34,7 @@ module "keycloak_cluster" {
     KC_HEALTH_ENABLED              = var.healthcheck_enabled
     KC_METRICS_ENABLED             = var.kc_metrics_enabled
     KC_LOG_LEVEL                   = var.kc_loglevel
-    KC_HOSTNAME                    = local.keycloak_dns_name
+    KC_HOSTNAME                    = var.keycloak_hostname
     KC_HOSTNAME_STRICT_HTTPS       = var.hostname_strict_https
     KC_HOSTNAME_STRICT_BACKCHANNEL = var.hostname_strict_backchannel
     KC_HTTP_ENABLED                = var.http_enabled
