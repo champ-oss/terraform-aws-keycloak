@@ -59,7 +59,7 @@ data "aws_subnets" "public" {
 }
 
 module "core" {
-  source             = "github.com/champ-oss/terraform-aws-core.git?ref=v1.0.117-1ea02a2"
+  source             = "github.com/champ-oss/terraform-aws-core.git?ref=v1.0.118-971d6db"
   git                = local.git
   name               = local.git
   vpc_id             = data.aws_vpcs.this.ids[0]
