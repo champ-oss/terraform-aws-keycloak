@@ -90,7 +90,7 @@ module "this" {
   listener_arn        = module.core.lb_public_listener_arn
   lb_dns_name         = module.core.lb_public_dns_name
   lb_zone_id          = module.core.lb_public_zone_id
-  keycloak_hostname   = "keycloak.${data.aws_route53_zone.this.name}"
+  dns_name            = "keycloak.${data.aws_route53_zone.this.name}"
   protect             = false
   skip_final_snapshot = true
 }

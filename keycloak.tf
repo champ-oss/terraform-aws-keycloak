@@ -2,7 +2,7 @@ module "keycloak_cluster" {
   source                = "github.com/champ-oss/terraform-aws-app.git?ref=v1.0.228-142bc80"
   git                   = var.git
   vpc_id                = var.vpc_id
-  subnets               = var.private_subnet_ids
+  subnets               = var.subnets
   cluster               = var.cluster_name
   zone_id               = var.zone_id
   security_groups       = var.security_groups
@@ -17,7 +17,7 @@ module "keycloak_cluster" {
 
   # app specific variables
   name     = var.kc_app_name
-  dns_name = var.keycloak_hostname
+  dns_name = var.dns_name
   image    = var.image_shared_keycloak
   cpu      = var.ecs_keycloak_cpu
   memory   = var.ecs_keycloak_memory
@@ -33,7 +33,7 @@ module "keycloak_cluster" {
     KC_HEALTH_ENABLED              = var.healthcheck_enabled
     KC_METRICS_ENABLED             = var.kc_metrics_enabled
     KC_LOG_LEVEL                   = var.kc_loglevel
-    KC_HOSTNAME                    = var.keycloak_hostname
+    KC_HOSTNAME                    = var.dns_name
     KC_HOSTNAME_STRICT_HTTPS       = var.hostname_strict_https
     KC_HOSTNAME_STRICT_BACKCHANNEL = var.hostname_strict_backchannel
     KC_HTTP_ENABLED                = var.http_enabled
@@ -41,7 +41,7 @@ module "keycloak_cluster" {
     PROXY_ADDRESS_FORWARDING       = "true"
     KC_CACHE                       = "ispn"
     KC_CACHE_STACK                 = "ec2"
-    "JAVA_OPTS" : "-Xms512m -Xmx2048m -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -Dquarkus.http.root-path=/auth -Djava.net.preferIPv4Stack=true -Djgroups.s3.region_name=${data.aws_region.current.name} -Djgroups.s3.bucket_name=${module.s3.bucket}"
+    "JAVA_OPTS" : "-Xms512m -Xmx${var.ecs_keycloak_memory}m -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -Dquarkus.http.root-path=/auth -Djava.net.preferIPv4Stack=true -Djgroups.s3.region_name=${data.aws_region.current.name} -Djgroups.s3.bucket_name=${module.s3.bucket}"
   }
   ## passing passwords as secrets
   secrets = {

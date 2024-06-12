@@ -42,29 +42,8 @@ variable "zone_id" {
   default     = ""
 }
 
-variable "keycloak_hostname" {
-  description = "Optional hostname for the keycloak server. If omitted a random identifier will be used."
-  type        = string
-  default     = "keycloak"
-}
-
 variable "vpc_id" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group#vpc_id"
-  type        = string
-}
-
-variable "public_subnet_ids" {
-  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb#subnets"
-  type        = list(string)
-}
-
-variable "private_subnet_ids" {
-  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eks_cluster#subnet_ids"
-  type        = list(string)
-}
-
-variable "certificate_arn" {
-  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener#certificate_arn"
   type        = string
 }
 
@@ -276,12 +255,6 @@ variable "listener_arn" {
   default     = ""
 }
 
-variable "dns_name" {
-  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record#name"
-  type        = string
-  default     = ""
-}
-
 variable "lb_dns_name" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb#dns_name"
   type        = string
@@ -296,6 +269,17 @@ variable "lb_zone_id" {
 
 variable "alb_arn_suffix" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/appautoscaling_target#resource_id"
+  type        = string
+  default     = ""
+}
+
+variable "subnets" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_service#subnets"
+  type        = list(string)
+}
+
+variable "dns_name" {
+  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record#name"
   type        = string
   default     = ""
 }
