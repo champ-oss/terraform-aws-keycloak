@@ -1,6 +1,6 @@
 output "keycloak_endpoint" {
   description = "keycloak endpoint url"
-  value       = "https://${local.keycloak_dns_name}"
+  value       = "https://${module.keycloak_cluster.dns_endpoint}"
 }
 
 output "keycloak_admin_password" {
