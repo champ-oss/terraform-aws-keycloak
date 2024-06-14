@@ -1,6 +1,6 @@
 module "keycloak_cluster" {
   source                = "github.com/champ-oss/terraform-aws-app.git?ref=v1.0.228-142bc80"
-  git                   = var.git
+  git                   = var.name
   vpc_id                = var.vpc_id
   subnets               = var.subnets
   cluster               = var.cluster_name

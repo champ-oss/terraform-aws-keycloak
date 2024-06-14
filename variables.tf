@@ -95,8 +95,8 @@ variable "filter_pattern" {
   default     = ""
 }
 
-variable "git" {
-  description = "Name of the Git repo"
+variable "name" {
+  description = "Name of key resources"
   type        = string
   default     = "terraform-aws-keycloak"
 }
