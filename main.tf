@@ -14,7 +14,7 @@ resource "random_password" "shared_keycloak" {
 }
 
 module "core" {
-  source             = "github.com/champ-oss/terraform-aws-core.git?ref=v1.0.117-1ea02a2"
+  source             = "github.com/champ-oss/terraform-aws-core.git?ref=v1.0.119-061bf8b"
   git                = var.git
   name               = var.git
   vpc_id             = var.vpc_id
