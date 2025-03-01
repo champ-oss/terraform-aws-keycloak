@@ -1,6 +1,6 @@
 module "aurora" {
   count                     = var.enable_cluster ? 1 : 0
-  source                    = "github.com/champ-oss/terraform-aws-aurora.git?ref=v1.0.61-1650303"
+  source                    = "github.com/champ-oss/terraform-aws-aurora.git?ref=v1.0.65-3edd171"
   cluster_identifier_prefix = var.git
   private_subnet_ids        = var.private_subnet_ids
   vpc_id                    = var.vpc_id
